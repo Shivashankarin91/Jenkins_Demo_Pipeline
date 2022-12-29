@@ -7,12 +7,7 @@ pipeline {
          steps {
                sh 'mvn clean install -f myJan2021Repo/MyWebApp/pom.xml'
             }           
-        }   
-        post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
+        }          
     
             stage ('Nexus upload') {
                 steps {
@@ -20,6 +15,11 @@ pipeline {
  
                 }
         
+            }
+        post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
             }
         
     } 
